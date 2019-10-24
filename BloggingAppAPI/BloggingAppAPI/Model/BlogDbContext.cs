@@ -19,7 +19,8 @@ namespace BloggingAppAPI.Model
             modelBuilder.Entity<Blog>(entity => 
             {
                 entity.HasKey("BlogId");
-                entity.Property("BlogMainImageUrl");
+                entity.Property("BlogMainImageUrl")
+                      .HasMaxLength(1000);
                 entity.Property("BlogHeading")
                       .HasMaxLength(150);
                 entity.Property("BlogBrief")

@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using BloggingAppAPI.IRepository;
+using BloggingAppAPI.Repository;
 
 namespace BloggingAppAPI
 {
@@ -23,6 +25,17 @@ namespace BloggingAppAPI
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddDbContextPool<BlogDbContext>(options => options.UseMySql(Configuration.GetConnectionString("DefautConnection")));
+
+            services.AddScoped<IBlogRepository, BlogRepository>();
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyHeader()
+                           .AllowAnyMethod()
+                           .AllowAnyOrigin();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,6 +47,7 @@ namespace BloggingAppAPI
             }
 
             app.UseMvc();
+            app.UseCors();
         }
     }
 }
