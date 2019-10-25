@@ -9,5 +9,6 @@ namespace BloggingAppAPI.IRepository
     public interface IBlogRepository
     {
         Task<List<Blog>> GetAllBlogs();
+        Task<Blog> GetBlogDetails(int blogId);
     }
 }

@@ -27,5 +27,20 @@ namespace BloggingAppAPI.Controllers
             List<Blog> listOfBlog = await _blogRepository.GetAllBlogs();
             return Ok(listOfBlog);
         }
+
+        [HttpGet]
+        [Route("GetBlogDetails")]
+        public async Task<IActionResult> GetBlogDetails([FromQuery]int blogId)
+        {
+            Blog blogToReturn = await _blogRepository.GetBlogDetails(blogId);
+            if (blogToReturn != null)
+            {
+                return Ok(blogToReturn);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
     }
 }

@@ -23,5 +23,12 @@ namespace BloggingAppAPI.Repository
             List<Blog> listOfBlogs= await _dbContext.Blogs.ToListAsync();
             return listOfBlogs;
         }
+
+        public async Task<Blog> GetBlogDetails(int blogId)
+        {
+            return await _dbContext.Blogs
+                                   .Where(x => x.BlogId == blogId)
+                                   .FirstOrDefaultAsync();
+        }
     }
 }
