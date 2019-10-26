@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using BloggingAppAPI.IRepository;
 using BloggingAppAPI.Model;
+using BloggingAppAPI.UIModel;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,7 +33,7 @@ namespace BloggingAppAPI.Controllers
         [Route("GetBlogDetails")]
         public async Task<IActionResult> GetBlogDetails([FromQuery]int blogId)
         {
-            Blog blogToReturn = await _blogRepository.GetBlogDetails(blogId);
+            BlogInfo blogToReturn = await _blogRepository.GetBlogDetails(blogId);
             if (blogToReturn != null)
             {
                 return Ok(blogToReturn);
@@ -41,6 +42,13 @@ namespace BloggingAppAPI.Controllers
             {
                 return NotFound();
             }
+        }
+
+        [HttpPost]
+        [Route("AddBlog")]
+        public async Task<IActionResult> AddBlog([FromBody] BlogInfo blogInfo) 
+        {
+            return Ok(await _blogRepository.AddBlog(blogInfo));
         }
     }
 }

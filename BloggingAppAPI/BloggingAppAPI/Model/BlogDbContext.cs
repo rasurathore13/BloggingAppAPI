@@ -13,6 +13,7 @@ namespace BloggingAppAPI.Model
         { }
 
         public DbSet<Blog> Blogs { get; set; }
+        public DbSet<BlogBody> BlogBodies { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -28,6 +29,13 @@ namespace BloggingAppAPI.Model
                 entity.Property("BlogAuthor")
                       .HasMaxLength(50);
                 entity.Property("BlogDateTimeStamp");
+            });
+
+            modelBuilder.Entity<BlogBody>(entity =>
+            {
+                entity.HasKey("BlogBodyId");
+                entity.Property("BlogId");
+                entity.Property("EntireBlog");
             });
         }
     }
