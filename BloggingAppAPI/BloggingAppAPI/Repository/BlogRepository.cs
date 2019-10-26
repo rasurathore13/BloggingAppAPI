@@ -70,7 +70,8 @@ namespace BloggingAppAPI.Repository
             BlogBody blogBody = await _dbContext.BlogBodies
                                           .Where(x => x.BlogId == blog.BlogId)
                                           .FirstOrDefaultAsync();
-            if (blog != null)
+            
+            if (blog != null && blogBody != null)
             {
                 BlogInfo blogInfo = new BlogInfo()
                 {
