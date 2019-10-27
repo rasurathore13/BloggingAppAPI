@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using BloggingAppAPI.IRepository;
 using BloggingAppAPI.Model;
 using BloggingAppAPI.UIModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
@@ -46,6 +47,7 @@ namespace BloggingAppAPI.Controllers
 
         [HttpPost]
         [Route("AddBlog")]
+        [Authorize]
         public async Task<IActionResult> AddBlog([FromBody] BlogInfo blogInfo) 
         {
             return Ok(await _blogRepository.AddBlog(blogInfo));
