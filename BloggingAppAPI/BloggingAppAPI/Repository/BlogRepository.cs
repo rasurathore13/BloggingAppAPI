@@ -57,7 +57,9 @@ namespace BloggingAppAPI.Repository
 
         public async Task<List<Blog>> GetAllBlogs()
         {
-            List<Blog> listOfBlogs= await _dbContext.Blogs.ToListAsync();
+            List<Blog> listOfBlogs= await _dbContext.Blogs
+                                                    .OrderByDescending(x => x.BlogDateTimeStamp)
+                                                    .ToListAsync();
             return listOfBlogs;
         }
 
